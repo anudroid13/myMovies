@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MyMoviesApp</string>
+
+    <string name="select_popular">Popular</string>
+    <string name="select_top_rated">Top Rated</string>
+    <string name="wait">Loading… Please wait</string>
+    <string name="no_image">No Image</string>
+    <string name="movie_details">Movie Details</string>
+    <string name="network_error">No internet connection</string>
+    <string name="retry">Retry</string>
+    <string name="popular">popular</string>
+    <string name="top_rated">top_rated</string>
+    <string name="error_msg">Something went wrong</string>
+    <string name="pop_movies">Popular movies</string>
+    <string name="top_rated_movies">Top rated movies</string>
+</resources>
