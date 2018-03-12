@@ -38,6 +38,14 @@
                     android:layout_height="240dp"
                     android:id="@+id/img_banner"
                     android:contentDescription="@string/no_image" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/img_fav"
+                    android:layout_gravity="end"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_favorite_border_black_24dp"/>
             </FrameLayout>
 
             <LinearLayout
@@ -72,5 +80,11 @@
             android:layout_height="2dp"
             android:background="@color/colorGray"
             android:layout_margin="10dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycler_view"
+            android:nestedScrollingEnabled="false"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

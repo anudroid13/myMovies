@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import myapp.nigam.com.mymoviesapp.interfaces.GetMoviesListener;
+import myapp.nigam.com.mymoviesapp.models.ModelsList;
 import myapp.nigam.com.mymoviesapp.models.MovieDetails;
 import myapp.nigam.com.mymoviesapp.utils.NetworkUtil;
 
@@ -42,6 +43,7 @@ class GetMovies extends AsyncTask<String, Void, String> {
             listener.onFailure();
             return;
         }
+        ModelsList modelsList = ModelsList.getInstance();
         ArrayList<MovieDetails> arrayList = new ArrayList<>();
         try {
             JSONObject jsonObject = new JSONObject(s);
@@ -50,9 +52,8 @@ class GetMovies extends AsyncTask<String, Void, String> {
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
-                MovieDetails details = new MovieDetails();
-
                 JSONObject json = jsonArray.optJSONObject(i);
+                MovieDetails details = new MovieDetails();
 
                 details.setVoteCount(json.optInt("vote_count"));
                 details.setId(json.optInt("id"));
@@ -76,7 +77,8 @@ class GetMovies extends AsyncTask<String, Void, String> {
         }
 
         if (!arrayList.isEmpty()) {
-            listener.onSuccess(arrayList);
+            modelsList.setArrayList(arrayList);
+            listener.onSuccess();
         } else {
             listener.onFailure();
         }

@@ -4,22 +4,7 @@
             "outputFile": "/home/anuragnigam/Desktop/myMovies/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-port/values-port.xml",
             "map": [
                 {
-                    "source": "/home/anuragnigam/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/d24e60ca5863c14ade78fd33a0399778/res/values-port/values-port.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "55",
-                        "endOffsets": "106"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/home/anuragnigam/Desktop/udacity/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-port/values-port.xml",
-            "map": [
-                {
-                    "source": "/home/anuragnigam/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/d24e60ca5863c14ade78fd33a0399778/res/values-port/values-port.xml",
+                    "source": "/home/anuragnigam/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/4c0816c66d91a325d6d10ed84d1ce04c/res/values-port/values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -6,7 +6,7 @@ import myapp.nigam.com.mymoviesapp.models.MovieDetails;
 
 public interface GetMoviesListener {
 
-    void onSuccess(ArrayList<MovieDetails> arrayList);
+    void onSuccess();
 
     void onFailure();
 }
