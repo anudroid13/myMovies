@@ -7,7 +7,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,48 +15,42 @@ import android.widget.Toast;
 import java.net.URL;
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import myapp.nigam.com.mymoviesapp.interfaces.GetMoviesListener;
 import myapp.nigam.com.mymoviesapp.interfaces.OnItemClickListener;
-import myapp.nigam.com.mymoviesapp.models.ModelsList;
 import myapp.nigam.com.mymoviesapp.models.MovieDetails;
 import myapp.nigam.com.mymoviesapp.utils.NetworkUtil;
 
 public class MainActivity extends AppCompatActivity implements GetMoviesListener {
 
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
     private ProgressDialog pDialog;
+    private RecyclerView recyclerView;
     private String category;
     private ArrayList<MovieDetails> movieDetails;
-    private CustomAdapter adapter;
-
     private final OnItemClickListener listener = new OnItemClickListener() {
         @Override
         public void onItemSelected(int position) {
             MovieDetails model = movieDetails.get(position);
             Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
             Bundle bundle = new Bundle();
-//            bundle.putString("title", model.getTitle());
-//            bundle.putString("synopsis", model.getOverview());
-//            bundle.putString("url", model.getPosterPath());
-//            bundle.putString("release", model.getReleaseDate());
-//            bundle.putString("rating", String.valueOf(model.getVoteAverage()));
-//            bundle.putInt("id", model.getId());
-            bundle.putInt("position", position);
+            bundle.putString("title", model.getTitle());
+            bundle.putString("synopsis", model.getOverview());
+            bundle.putString("url", model.getPosterPath());
+            bundle.putString("release", model.getReleaseDate());
+            bundle.putString("rating", String.valueOf(model.getVoteAverage()));
             intent.putExtra("extras", bundle);
             startActivity(intent);
         }
     };
+    private CustomAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ButterKnife.bind(MainActivity.this);
         init();
+
         if (savedInstanceState != null) {
             category = savedInstanceState.getString("category", getString(R.string.popular));
             getData(category);
@@ -105,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
         pDialog.setMessage(getString(R.string.wait));
         pDialog.setCancelable(false);
 
+        recyclerView = findViewById(R.id.recycler_view);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter = new CustomAdapter(listener);
@@ -154,9 +148,9 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(final ArrayList<MovieDetails> arrayList) {
         hidepDialog();
-        movieDetails = ModelsList.getInstance().getArrayList();
+        movieDetails = arrayList;
         adapter.setArrayList(movieDetails);
     }
 

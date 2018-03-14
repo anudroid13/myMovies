@@ -1,10 +1,25 @@
 {
     "logs": [
         {
+            "outputFile": "/home/anuragnigam/Desktop/udacity/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml",
+            "map": [
+                {
+                    "source": "/home/anuragnigam/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/d24e60ca5863c14ade78fd33a0399778/res/values-xlarge-v4/values-xlarge-v4.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,126,197,267,337,405",
+                        "endColumns": "70,70,69,69,67,67",
+                        "endOffsets": "121,192,262,332,400,468"
+                    }
+                }
+            ]
+        },
+        {
             "outputFile": "/home/anuragnigam/Desktop/myMovies/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml",
             "map": [
                 {
-                    "source": "/home/anuragnigam/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/4c0816c66d91a325d6d10ed84d1ce04c/res/values-xlarge-v4/values-xlarge-v4.xml",
+                    "source": "/home/anuragnigam/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/d24e60ca5863c14ade78fd33a0399778/res/values-xlarge-v4/values-xlarge-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",

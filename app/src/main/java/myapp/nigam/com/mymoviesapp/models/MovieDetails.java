@@ -1,13 +1,9 @@
 package myapp.nigam.com.mymoviesapp.models;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+public class MovieDetails {
 
-public class MovieDetails extends RealmObject{
-
-    @PrimaryKey
-    private int id;
     private int voteCount;
+    private int id;
     private boolean video;
     private float voteAverage;
     private String title;
