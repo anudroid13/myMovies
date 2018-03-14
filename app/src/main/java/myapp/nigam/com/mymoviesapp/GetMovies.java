@@ -2,6 +2,8 @@ package myapp.nigam.com.mymoviesapp;
 
 import android.os.AsyncTask;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,24 +52,10 @@ class GetMovies extends AsyncTask<String, Void, String> {
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
-                MovieDetails details = new MovieDetails();
-
                 JSONObject json = jsonArray.optJSONObject(i);
 
-                details.setVoteCount(json.optInt("vote_count"));
-                details.setId(json.optInt("id"));
-                details.setVideo(json.optBoolean("video"));
-                details.setVoteAverage(json.optInt("vote_average"));
-                details.setTitle(json.optString("title"));
-                details.setPopularity(json.optDouble("popularity"));
-                details.setPosterPath(json.optString("poster_path"));
-                details.setOriginalLanguage(json.optString("original_language"));
-                details.setOriginalTitle(json.optString("original_title"));
-                details.setBackdropPath(json.optString("backdrop_path"));
-                details.setAdult(json.optBoolean("adult"));
-                details.setOverview(json.optString("overview"));
-                details.setReleaseDate(json.optString("release_date"));
-
+                Gson gson = new Gson();
+                MovieDetails details = gson.fromJson(json.toString(), MovieDetails.class);
                 arrayList.add(details);
             }
         } catch (JSONException e) {

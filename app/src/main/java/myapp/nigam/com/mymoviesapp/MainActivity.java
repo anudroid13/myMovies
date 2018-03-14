@@ -15,6 +15,8 @@ import android.widget.Toast;
 import java.net.URL;
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import myapp.nigam.com.mymoviesapp.interfaces.GetMoviesListener;
 import myapp.nigam.com.mymoviesapp.interfaces.OnItemClickListener;
 import myapp.nigam.com.mymoviesapp.models.MovieDetails;
@@ -22,8 +24,9 @@ import myapp.nigam.com.mymoviesapp.utils.NetworkUtil;
 
 public class MainActivity extends AppCompatActivity implements GetMoviesListener {
 
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
     private ProgressDialog pDialog;
-    private RecyclerView recyclerView;
     private String category;
     private ArrayList<MovieDetails> movieDetails;
     private final OnItemClickListener listener = new OnItemClickListener() {
@@ -43,12 +46,12 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
     };
     private CustomAdapter adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(MainActivity.this);
         init();
 
         if (savedInstanceState != null) {
@@ -98,7 +101,6 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
         pDialog.setMessage(getString(R.string.wait));
         pDialog.setCancelable(false);
 
-        recyclerView = findViewById(R.id.recycler_view);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter = new CustomAdapter(listener);

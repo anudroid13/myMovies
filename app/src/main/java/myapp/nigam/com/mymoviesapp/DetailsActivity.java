@@ -12,22 +12,29 @@ import com.squareup.picasso.Picasso;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import myapp.nigam.com.mymoviesapp.utils.NetworkUtil;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    private TextView txtSynopsis;
-    private ImageView imgBanner;
-    private TextView txtYearOfRelease;
-    private TextView txtRating;
-    private TextView txtTitle;
+    @BindView(R.id.txt_synopsis)
+    TextView txtSynopsis;
+    @BindView(R.id.img_banner)
+    ImageView imgBanner;
+    @BindView(R.id.txt_release_year)
+    TextView txtYearOfRelease;
+    @BindView(R.id.txt_rating)
+    TextView txtRating;
+    @BindView(R.id.txt_title)
+    TextView txtTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        init();
+        ButterKnife.bind(DetailsActivity.this);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,14 +48,6 @@ public class DetailsActivity extends AppCompatActivity {
             txtTitle.setText(title);
             setData(bundle);
         }
-    }
-
-    private void init() {
-        txtSynopsis = findViewById(R.id.txt_synopsis);
-        imgBanner = findViewById(R.id.img_banner);
-        txtYearOfRelease = findViewById(R.id.txt_release_year);
-        txtRating = findViewById(R.id.txt_rating);
-        txtTitle = findViewById(R.id.txt_title);
     }
 
     private void setData(Bundle bundle) {
