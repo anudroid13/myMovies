@@ -78,6 +78,25 @@ public class NetworkUtil {
         }
     }
 
+    public static URL buildReviewsUrl(int id) {
+
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme(SCHEME)
+                .authority(BASE_URL)
+                .appendPath("3")
+                .appendPath("movie")
+                .appendPath(String.valueOf(id))
+                .appendPath("reviews")
+                .appendQueryParameter(PARAM1, API_KEY);
+
+        try {
+            return new URL(builder.build().toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {

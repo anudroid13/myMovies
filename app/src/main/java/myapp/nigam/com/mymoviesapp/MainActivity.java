@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import myapp.nigam.com.mymoviesapp.adapters.CustomAdapter;
+import myapp.nigam.com.mymoviesapp.asynctasks.GetMovies;
 import myapp.nigam.com.mymoviesapp.interfaces.GetMoviesListener;
 import myapp.nigam.com.mymoviesapp.interfaces.OnItemClickListener;
 import myapp.nigam.com.mymoviesapp.models.MovieDetails;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
             bundle.putString("url", model.getPosterPath());
             bundle.putString("release", model.getReleaseDate());
             bundle.putString("rating", String.valueOf(model.getVoteAverage()));
+            bundle.putInt("id", model.getId());
             intent.putExtra("extras", bundle);
             startActivity(intent);
         }

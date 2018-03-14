@@ -1,0 +1,4 @@
+#Wed Mar 14 18:42:47 IST 2018
+base.0=/home/anuragnigam/Desktop/myMovies/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex

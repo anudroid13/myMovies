@@ -1,8 +1,15 @@
 package myapp.nigam.com.mymoviesapp;
 
+import android.annotation.TargetApi;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,12 +18,23 @@ import com.squareup.picasso.Picasso;
 
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import myapp.nigam.com.mymoviesapp.adapters.ReviewAdapter;
+import myapp.nigam.com.mymoviesapp.adapters.TrailerAdapter;
+import myapp.nigam.com.mymoviesapp.asynctasks.GetReviews;
+import myapp.nigam.com.mymoviesapp.asynctasks.GetTrailers;
+import myapp.nigam.com.mymoviesapp.interfaces.GetReviewsListener;
+import myapp.nigam.com.mymoviesapp.interfaces.GetTrailersListener;
+import myapp.nigam.com.mymoviesapp.interfaces.OnItemClickListener;
+import myapp.nigam.com.mymoviesapp.models.ReviewModel;
+import myapp.nigam.com.mymoviesapp.models.TrailerModel;
 import myapp.nigam.com.mymoviesapp.utils.NetworkUtil;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity implements
+        GetTrailersListener, GetReviewsListener {
 
     @BindView(R.id.txt_synopsis)
     TextView txtSynopsis;
@@ -28,6 +46,41 @@ public class DetailsActivity extends AppCompatActivity {
     TextView txtRating;
     @BindView(R.id.txt_title)
     TextView txtTitle;
+    @BindView(R.id.recycler_view_trailers)
+    RecyclerView recyclerViewTrailers;
+    @BindView(R.id.recycler_view_reviews)
+    RecyclerView recyclerViewReviews;
+    private TrailerAdapter trailerAdapter;
+    private ReviewAdapter reviewAdapter;
+    private ArrayList<TrailerModel> trailerModels;
+    private ArrayList<ReviewModel> reviewModels;
+
+    private final OnItemClickListener trailerListener = new OnItemClickListener() {
+        @Override
+        public void onItemSelected(int position) {
+            TrailerModel model = trailerModels.get(position);
+
+            Intent appIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("vnd.youtube:" + model.getKey()));
+            Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://www.youtube.com/watch?v=" + model.getKey()));
+            try {
+                startActivity(appIntent);
+            } catch (ActivityNotFoundException ex) {
+                startActivity(webIntent);
+            }
+        }
+    };
+
+    private final OnItemClickListener reviewListener = new OnItemClickListener() {
+        @Override
+        public void onItemSelected(int position) {
+            ReviewModel model = reviewModels.get(position);
+
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(model.getUrl()));
+            startActivity(browserIntent);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +88,7 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         ButterKnife.bind(DetailsActivity.this);
+        init();
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -72,7 +126,40 @@ public class DetailsActivity extends AppCompatActivity {
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
+
+            URL urlTrailers = NetworkUtil.buildTrailersUrl(bundle.getInt("id"));
+            URL urlReviews = NetworkUtil.buildReviewsUrl(bundle.getInt("id"));
+
+            if (NetworkUtil.isNetworkAvailable(DetailsActivity.this)) {
+                if (urlTrailers != null) {
+                    GetTrailers task = new GetTrailers(DetailsActivity.this);
+                    task.execute(String.valueOf(urlTrailers));
+                }
+
+                if (urlReviews != null) {
+                    GetReviews task = new GetReviews(DetailsActivity.this);
+                    task.execute(String.valueOf(urlReviews));
+                }
+            }
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void init() {
+
+        LinearLayoutManager trailerManager = new
+                LinearLayoutManager(DetailsActivity.this);
+        LinearLayoutManager reviewManager = new
+                LinearLayoutManager(DetailsActivity.this);
+        recyclerViewTrailers.setLayoutManager(trailerManager);
+        recyclerViewReviews.setLayoutManager(reviewManager);
+        trailerAdapter = new TrailerAdapter(trailerListener);
+        reviewAdapter = new ReviewAdapter(reviewListener);
+        recyclerViewTrailers.setAdapter(trailerAdapter);
+        recyclerViewReviews.setAdapter(reviewAdapter);
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(DetailsActivity.this,
+                DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(getResources().getDrawable(R.drawable.divider, null));
     }
 
     @Override
@@ -91,5 +178,17 @@ public class DetailsActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onTrailerSuccess(ArrayList<TrailerModel> trailers) {
+        trailerModels = trailers;
+        trailerAdapter.setArrayList(trailers);
+    }
+
+    @Override
+    public void onReviewSuccess(ArrayList<ReviewModel> reviews) {
+        reviewModels = reviews;
+        reviewAdapter.setArrayList(reviews);
     }
 }

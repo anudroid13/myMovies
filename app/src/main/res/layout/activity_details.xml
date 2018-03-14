@@ -19,7 +19,7 @@
             android:textStyle="bold"
             android:textColor="@color/colorWhite"
             android:background="@color/colorBlue"
-            android:padding="8dp"/>
+            android:padding="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,5 +72,49 @@
             android:layout_height="2dp"
             android:background="@color/colorGray"
             android:layout_margin="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trailers"
+                android:layout_margin="10dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recycler_view_trailers"
+                android:nestedScrollingEnabled="false"
+                android:layout_margin="10dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorGray"
+            android:layout_margin="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/reviews"
+                android:layout_margin="10dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recycler_view_reviews"
+                android:nestedScrollingEnabled="false"
+                android:layout_margin="10dp" />
+        </LinearLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
