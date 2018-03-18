@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="myapp.nigam.com.mymoviesapp.DetailsActivity">
+    tools:context="myapp.nigam.com.mymoviesapp.activities.DetailsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,6 +38,14 @@
                     android:layout_height="240dp"
                     android:id="@+id/img_banner"
                     android:contentDescription="@string/no_image" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/img_fav"
+                    android:padding="16dp"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_favorite_border_black_24dp"/>
             </FrameLayout>
 
             <LinearLayout
@@ -76,7 +84,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/view_trailers"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -90,18 +100,20 @@
                 android:id="@+id/recycler_view_trailers"
                 android:nestedScrollingEnabled="false"
                 android:layout_margin="10dp" />
-        </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/colorGray"
-            android:layout_margin="10dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorGray"
+                android:layout_margin="10dp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/view_reviews"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
