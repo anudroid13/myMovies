@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="myapp.nigam.com.mymoviesapp.activities.DetailsActivity">
 
     <LinearLayout
@@ -27,26 +28,13 @@
             android:orientation="horizontal"
             android:layout_marginTop="10dp">
 
-            <FrameLayout
+            <ImageView
                 android:layout_width="150dp"
                 android:layout_height="240dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp">
-
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="240dp"
-                    android:id="@+id/img_banner"
-                    android:contentDescription="@string/no_image" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/img_fav"
-                    android:padding="16dp"
-                    android:layout_gravity="end"
-                    android:src="@drawable/ic_favorite_border_black_24dp"/>
-            </FrameLayout>
+                android:layout_marginLeft="20dp"
+                android:id="@+id/img_banner"
+                android:contentDescription="@string/no_image" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -58,14 +46,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/txt_release_year"
+                    android:padding="5dp"
                     android:textSize="22sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/txt_rating"
+                    android:padding="5dp"
                     android:textColor="@color/colorBlack"
                     android:textSize="16sp" />
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:id="@+id/chk_fav"
+                    android:text="@string/favorite"
+                    android:button="@drawable/checkbox_selector"
+                    app:switchPadding="10dp" />
             </LinearLayout>
         </LinearLayout>
 

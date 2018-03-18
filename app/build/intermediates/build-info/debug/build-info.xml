@@ -6,22 +6,22 @@
     density="xhdpi"
     format="10"
     plugin-version="3.0.1"
-    timestamp="1521378751643"
+    timestamp="1521399995185"
     token="-4632077866749841017"
     verifier="FULL_BUILD_REQUESTED" >
 
     <task
         name="javac"
-        duration="3622" />
+        duration="991" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="1564" />
+        duration="612" />
     <task
         name="verifier"
-        duration="434" />
+        duration="242" />
 
     <artifact
         location="C:\Users\Nigam\myMovies\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
@@ -62,7 +62,7 @@
 
     <build
         build-mode="FULL"
-        timestamp="1521378751643"
+        timestamp="1521399995185"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\Nigam\myMovies\app\build\intermediates\split-apk\debug\dep\dependencies.apk"

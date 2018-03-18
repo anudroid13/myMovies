@@ -7,11 +7,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,7 +42,7 @@ import myapp.nigam.com.mymoviesapp.models.TrailerModel;
 import myapp.nigam.com.mymoviesapp.utils.NetworkUtil;
 
 public class DetailsActivity extends AppCompatActivity implements
-        GetTrailersListener, GetReviewsListener, View.OnClickListener {
+        GetTrailersListener, GetReviewsListener {
 
     @BindView(R.id.txt_synopsis)
     TextView txtSynopsis;
@@ -56,19 +58,17 @@ public class DetailsActivity extends AppCompatActivity implements
     RecyclerView recyclerViewTrailers;
     @BindView(R.id.recycler_view_reviews)
     RecyclerView recyclerViewReviews;
-    @BindView(R.id.img_fav)
-    ImageView imgFav;
     @BindView(R.id.view_trailers)
     LinearLayout llTrailers;
     @BindView(R.id.view_reviews)
     LinearLayout llReviews;
+    @BindView(R.id.chk_fav)
+    AppCompatCheckBox chkFav;
     private TrailerAdapter trailerAdapter;
     private ReviewAdapter reviewAdapter;
     private ArrayList<TrailerModel> trailerModels;
     private ArrayList<ReviewModel> reviewModels;
     private MovieDetails details;
-    private static boolean isFav = false;
-    private boolean previousState;
 
     private final OnItemClickListener trailerListener = new OnItemClickListener() {
         @Override
@@ -117,7 +117,23 @@ public class DetailsActivity extends AppCompatActivity implements
             setData();
         }
 
-        imgFav.setOnClickListener(this);
+        chkFav.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                MovieDBHelper helper = new MovieDBHelper(DetailsActivity.this);
+                if (b) {
+                    if (helper.insert(details) != 0) {
+                        Toast.makeText(DetailsActivity.this, "Added to favorites",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    if (helper.delete(String.valueOf(details.getId())) > 0) {
+                        Toast.makeText(DetailsActivity.this, "Removed from favorites",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
     }
 
     private void setData() {
@@ -156,13 +172,9 @@ public class DetailsActivity extends AppCompatActivity implements
 
         MovieDBHelper helper = new MovieDBHelper(DetailsActivity.this);
         if (helper.isMovieExists(String.valueOf(details.getId()))) {
-            imgFav.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
-            isFav = false;
-            previousState = true;
+            chkFav.setChecked(true);
         } else {
-            imgFav.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
-            isFav = true;
-            previousState = false;
+            chkFav.setChecked(false);
         }
     }
 
@@ -191,9 +203,7 @@ public class DetailsActivity extends AppCompatActivity implements
         switch (id) {
 
             case android.R.id.home: {
-                if (previousState == isFav) {
-                    setResult(RESULT_OK);
-                }
+                setResult(RESULT_OK);
                 DetailsActivity.this.finish();
                 break;
             }
@@ -221,26 +231,5 @@ public class DetailsActivity extends AppCompatActivity implements
         }
         reviewModels = reviews;
         reviewAdapter.setArrayList(reviews);
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        if (view.getId() == R.id.img_fav) {
-            MovieDBHelper helper = new MovieDBHelper(DetailsActivity.this);
-
-            if (isFav) {
-                if (helper.insert(details) != 0) {
-                    Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show();
-                    imgFav.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_black_24dp));
-                }
-            } else {
-                if (helper.delete(String.valueOf(details.getId())) > 0) {
-                    Toast.makeText(this, "Removed from favorites", Toast.LENGTH_SHORT).show();
-                    imgFav.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp));
-                }
-            }
-            isFav = !isFav;
-        }
     }
 }

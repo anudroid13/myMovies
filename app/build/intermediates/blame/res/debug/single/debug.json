@@ -564,6 +564,10 @@
         "source": "C:\\Users\\Nigam\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\0550a6b64b1f83fd4b7a987455978ebe\\res\\layout\\design_menu_item_action_area.xml"
     },
     {
+        "merged": "C:\\Users\\Nigam\\myMovies\\app\\build\\intermediates\\res\\merged\\debug\\drawable_checkbox_selector.xml.flat",
+        "source": "C:\\Users\\Nigam\\myMovies\\app\\src\\main\\res\\drawable\\checkbox_selector.xml"
+    },
+    {
         "merged": "C:\\Users\\Nigam\\myMovies\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_notify_panel_notification_icon_bg.png.flat",
         "source": "C:\\Users\\Nigam\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\c9c1de9ad961c697d31032609b1b8ecd\\res\\drawable-hdpi-v4\\notify_panel_notification_icon_bg.png"
     },

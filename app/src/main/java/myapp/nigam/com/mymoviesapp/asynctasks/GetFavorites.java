@@ -3,6 +3,7 @@ package myapp.nigam.com.mymoviesapp.asynctasks;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import myapp.nigam.com.mymoviesapp.content.MovieDBHelper;
@@ -16,16 +17,16 @@ import myapp.nigam.com.mymoviesapp.models.MovieDetails;
 public class GetFavorites extends AsyncTask<String, Void, ArrayList<MovieDetails>> {
 
     private final GetFavoritesListener listener;
-    private Context mContext;
+    private WeakReference<Context> mContext;
 
-    public GetFavorites(Context context, GetFavoritesListener listener) {
+    public GetFavorites(WeakReference<Context> context, GetFavoritesListener listener) {
         this.listener = listener;
         this.mContext = context;
     }
 
     @Override
     protected ArrayList<MovieDetails> doInBackground(String... strings) {
-        MovieDBHelper helper = new MovieDBHelper(mContext);
+        MovieDBHelper helper = new MovieDBHelper(mContext.get());
 
         return helper.fetch();
     }

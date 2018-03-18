@@ -780,6 +780,7 @@
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
     <string name="error_msg">Something went wrong</string>
+    <string name="favorite">Favorite</string>
     <string name="favorites">Favorites</string>
     <string name="movie_details">Movie Details</string>
     <string name="network_error">No internet connection</string>

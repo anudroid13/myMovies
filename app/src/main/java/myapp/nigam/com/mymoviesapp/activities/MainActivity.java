@@ -1,6 +1,7 @@
 package myapp.nigam.com.mymoviesapp.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -204,9 +206,10 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
         }
     }
 
-    private void fetchFavoriteMovies(final boolean isDataChanged){
+    private void fetchFavoriteMovies(final boolean isDataChanged) {
         showpDialog();
-        GetFavorites task = new GetFavorites(MainActivity.this, new GetFavoritesListener() {
+        GetFavorites task = new GetFavorites(new WeakReference<Context>(MainActivity.this),
+                new GetFavoritesListener() {
             @Override
             public void onSuccess(ArrayList<MovieDetails> arrayList) {
                 hidepDialog();
@@ -219,8 +222,8 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
                     }
                     category = "favorites";
                 } else {
-                    if(isDataChanged){
-                        movieDetails =  arrayList;
+                    if (isDataChanged) {
+                        movieDetails = arrayList;
                         adapter.setArrayList(movieDetails);
                     }
                     Toast.makeText(MainActivity.this, "You have not added any movie under this category",

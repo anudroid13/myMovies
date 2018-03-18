@@ -3,6 +3,7 @@ package myapp.nigam.com.mymoviesapp.activities;
 
 import android.support.annotation.CallSuper;
 import android.support.annotation.UiThread;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,9 +34,9 @@ public class DetailsActivity_ViewBinding implements Unbinder {
     target.txtTitle = Utils.findRequiredViewAsType(source, R.id.txt_title, "field 'txtTitle'", TextView.class);
     target.recyclerViewTrailers = Utils.findRequiredViewAsType(source, R.id.recycler_view_trailers, "field 'recyclerViewTrailers'", RecyclerView.class);
     target.recyclerViewReviews = Utils.findRequiredViewAsType(source, R.id.recycler_view_reviews, "field 'recyclerViewReviews'", RecyclerView.class);
-    target.imgFav = Utils.findRequiredViewAsType(source, R.id.img_fav, "field 'imgFav'", ImageView.class);
     target.llTrailers = Utils.findRequiredViewAsType(source, R.id.view_trailers, "field 'llTrailers'", LinearLayout.class);
     target.llReviews = Utils.findRequiredViewAsType(source, R.id.view_reviews, "field 'llReviews'", LinearLayout.class);
+    target.chkFav = Utils.findRequiredViewAsType(source, R.id.chk_fav, "field 'chkFav'", AppCompatCheckBox.class);
   }
 
   @Override
@@ -52,8 +53,8 @@ public class DetailsActivity_ViewBinding implements Unbinder {
     target.txtTitle = null;
     target.recyclerViewTrailers = null;
     target.recyclerViewReviews = null;
-    target.imgFav = null;
     target.llTrailers = null;
     target.llReviews = null;
+    target.chkFav = null;
   }
 }
