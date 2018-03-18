@@ -3,6 +3,7 @@ package myapp.nigam.com.mymoviesapp.activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
         }
     };
     private CustomAdapter adapter;
+    private GetFavorites task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
 
     private void fetchFavoriteMovies(final boolean isDataChanged) {
         showpDialog();
-        GetFavorites task = new GetFavorites(new WeakReference<Context>(MainActivity.this),
+        task = new GetFavorites(new WeakReference<Context>(MainActivity.this),
                 new GetFavoritesListener() {
             @Override
             public void onSuccess(ArrayList<MovieDetails> arrayList) {
@@ -238,5 +240,14 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
             }
         });
         task.execute();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
+            task.cancel(true);
+        }
     }
 }
