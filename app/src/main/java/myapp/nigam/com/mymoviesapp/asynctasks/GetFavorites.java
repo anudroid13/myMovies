@@ -10,11 +10,7 @@ import myapp.nigam.com.mymoviesapp.content.MovieDBHelper;
 import myapp.nigam.com.mymoviesapp.interfaces.GetFavoritesListener;
 import myapp.nigam.com.mymoviesapp.models.MovieDetails;
 
-/**
- * Created by Nigam on 3/18/2018.
- */
-
-public class GetFavorites extends AsyncTask<String, Void, ArrayList<MovieDetails>> {
+public class GetFavorites extends AsyncTask<Void, Void, ArrayList<MovieDetails>> {
 
     private final GetFavoritesListener listener;
     private WeakReference<Context> mContext;
@@ -25,9 +21,8 @@ public class GetFavorites extends AsyncTask<String, Void, ArrayList<MovieDetails
     }
 
     @Override
-    protected ArrayList<MovieDetails> doInBackground(String... strings) {
+    protected ArrayList<MovieDetails> doInBackground(Void... args) {
         MovieDBHelper helper = new MovieDBHelper(mContext.get());
-
         return helper.fetch();
     }
 
@@ -37,7 +32,6 @@ public class GetFavorites extends AsyncTask<String, Void, ArrayList<MovieDetails
             listener.onFailure();
             return;
         }
-
         listener.onSuccess(arrayList);
     }
 }

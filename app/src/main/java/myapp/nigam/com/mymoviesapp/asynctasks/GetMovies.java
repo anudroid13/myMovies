@@ -32,7 +32,6 @@ public class GetMovies extends AsyncTask<String, Void, String> {
             res = NetworkUtil.getResponseFromHttpUrl(new URL(strings[0]));
         } catch (IOException e) {
             e.printStackTrace();
-            listener.onFailure();
         }
         return res;
     }

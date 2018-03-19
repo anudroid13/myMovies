@@ -69,6 +69,7 @@ public class DetailsActivity extends AppCompatActivity implements
     private ArrayList<TrailerModel> trailerModels;
     private ArrayList<ReviewModel> reviewModels;
     private MovieDetails details;
+    private final String MODEL_KEY = "model";
 
     private final OnItemClickListener trailerListener = new OnItemClickListener() {
         @Override
@@ -111,8 +112,8 @@ public class DetailsActivity extends AppCompatActivity implements
         }
 
         Intent intent = getIntent();
-        if (intent.hasExtra("model")) {
-            details = intent.getParcelableExtra("model");
+        if (intent.hasExtra(MODEL_KEY)) {
+            details = intent.getParcelableExtra(MODEL_KEY);
             txtTitle.setText(details.getTitle());
             setData();
         }
@@ -123,12 +124,14 @@ public class DetailsActivity extends AppCompatActivity implements
                 MovieDBHelper helper = new MovieDBHelper(DetailsActivity.this);
                 if (b) {
                     if (helper.insert(details) != 0) {
-                        Toast.makeText(DetailsActivity.this, "Added to favorites",
+                        Toast.makeText(DetailsActivity.this,
+                                getString(R.string.added_to_favourite_label),
                                 Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     if (helper.delete(String.valueOf(details.getId())) > 0) {
-                        Toast.makeText(DetailsActivity.this, "Removed from favorites",
+                        Toast.makeText(DetailsActivity.this,
+                                getString(R.string.add_to_favourite_label),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }

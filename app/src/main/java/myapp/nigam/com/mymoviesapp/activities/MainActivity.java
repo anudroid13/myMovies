@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
     private String category;
     private final String CATEGORY_KEY = "category";
     private final String MOVIE_LIST_KEY = "movie_list";
+    private final String MODEL_KEY = "model";
     private ArrayList<MovieDetails> movieDetails;
     private final int REQ_CODE = 1001;
     private final OnItemClickListener listener = new OnItemClickListener() {
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
         public void onItemSelected(int position) {
             MovieDetails model = movieDetails.get(position);
             Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-            intent.putExtra("model", model);
+            intent.putExtra(MODEL_KEY, model);
             startActivityForResult(intent, REQ_CODE);
         }
     };
@@ -112,7 +113,8 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
         pDialog.setMessage(getString(R.string.wait));
         pDialog.setCancelable(false);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this,
+                2);
         recyclerView.setLayoutManager(gridLayoutManager);
         adapter = new CustomAdapter(listener);
         recyclerView.setAdapter(adapter);
@@ -132,17 +134,11 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
 
             case R.id.action_select_popular: {
                 getData(getString(R.string.popular));
-                if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle(R.string.pop_movies);
-                }
                 break;
             }
 
             case R.id.action_select_top_rated: {
                 getData(getString(R.string.top_rated));
-                if (getSupportActionBar() != null) {
-                    getSupportActionBar().setTitle(R.string.top_rated_movies);
-                }
                 break;
             }
 
@@ -170,6 +166,15 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
         hidepDialog();
         movieDetails = arrayList;
         adapter.setArrayList(movieDetails);
+        if (getSupportActionBar() != null) {
+            if (category.equalsIgnoreCase("popular")) {
+                getSupportActionBar().setTitle(R.string.pop_movies);
+            } else if (category.equalsIgnoreCase("favorites")) {
+                getSupportActionBar().setTitle(R.string.favorites);
+            } else {
+                getSupportActionBar().setTitle(R.string.top_rated_movies);
+            }
+        }
     }
 
     @Override
@@ -202,7 +207,8 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQ_CODE && resultCode == RESULT_OK && category.equalsIgnoreCase("favorites")) {
+        if (requestCode == REQ_CODE && resultCode == RESULT_OK &&
+                category.equalsIgnoreCase("favorites")) {
 
             fetchFavoriteMovies(true);
         }
@@ -228,7 +234,8 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
                         movieDetails = arrayList;
                         adapter.setArrayList(movieDetails);
                     }
-                    Toast.makeText(MainActivity.this, "You have not added any movie under this category",
+                    Toast.makeText(MainActivity.this, "You have not added any " +
+                                    "movie under this category",
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -236,7 +243,8 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
             @Override
             public void onFailure() {
                 hidepDialog();
-                Toast.makeText(MainActivity.this, R.string.error_msg, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.error_msg,
+                        Toast.LENGTH_SHORT).show();
             }
         });
         task.execute();
