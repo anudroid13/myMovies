@@ -13,4 +13,8 @@
     <string name="error_msg">Something went wrong</string>
     <string name="pop_movies">Popular movies</string>
     <string name="top_rated_movies">Top rated movies</string>
+    <string name="trailers">Trailers :</string>
+    <string name="reviews">Reviews :</string>
+    <string name="favorites">Favorites</string>
+    <string name="favorite">Favorite</string>
 </resources>

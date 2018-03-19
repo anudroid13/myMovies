@@ -124,6 +124,7 @@
     <color name="colorBlack">#000000</color>
     <color name="colorBlue">#036364</color>
     <color name="colorGray">#999999</color>
+    <color name="colorGrayLine">#e8ecf1</color>
     <color name="colorPrimary">#2A3330</color>
     <color name="colorPrimaryDark">#191e1d</color>
     <color name="colorWhite">#FFFFFF</color>
@@ -779,6 +780,8 @@
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
     <string name="error_msg">Something went wrong</string>
+    <string name="favorite">Favorite</string>
+    <string name="favorites">Favorites</string>
     <string name="movie_details">Movie Details</string>
     <string name="network_error">No internet connection</string>
     <string name="no_image">No Image</string>
@@ -790,12 +793,14 @@
     <string name="pop_movies">Popular movies</string>
     <string name="popular">popular</string>
     <string name="retry">Retry</string>
+    <string name="reviews">Reviews :</string>
     <string name="search_menu_title">Search</string>
     <string name="select_popular">Popular</string>
     <string name="select_top_rated">Top Rated</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="top_rated">top_rated</string>
     <string name="top_rated_movies">Top rated movies</string>
+    <string name="trailers">Trailers :</string>
     <string name="wait">Loading… Please wait</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>

@@ -1,25 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/anuragnigam/Desktop/myMovies/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-v18/values-v18.xml",
+            "outputFile": "C:\\Users\\Nigam\\myMovies\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v18\\values-v18.xml",
             "map": [
                 {
-                    "source": "/home/anuragnigam/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/d24e60ca5863c14ade78fd33a0399778/res/values-v18/values-v18.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "48",
-                        "endOffsets": "99"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "/home/anuragnigam/Desktop/udacity/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-v18/values-v18.xml",
-            "map": [
-                {
-                    "source": "/home/anuragnigam/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/d24e60ca5863c14ade78fd33a0399778/res/values-v18/values-v18.xml",
+                    "source": "C:\\Users\\Nigam\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9d50ce0dd5f1ca35f7f4baa4a70e963c\\res\\values-v18\\values-v18.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
