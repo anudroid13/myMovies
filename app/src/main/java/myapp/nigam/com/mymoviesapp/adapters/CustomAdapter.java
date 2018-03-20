@@ -53,6 +53,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             if (url != null) {
                 Picasso.with(mContext)
                         .load(String.valueOf(url.toURI()))
+                        .error(R.drawable.ic_launcher_foreground)
                         .into(holder.imgBanner);
             }
         } catch (URISyntaxException e) {

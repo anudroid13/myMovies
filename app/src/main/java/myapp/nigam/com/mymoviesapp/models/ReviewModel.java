@@ -1,8 +1,11 @@
 package myapp.nigam.com.mymoviesapp.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class ReviewModel {
+public class ReviewModel implements Parcelable {
 
     @SerializedName("id")
     private String id;
@@ -12,6 +15,25 @@ public class ReviewModel {
     private String content;
     @SerializedName("url")
     private String url;
+
+    protected ReviewModel(Parcel in) {
+        id = in.readString();
+        author = in.readString();
+        content = in.readString();
+        url = in.readString();
+    }
+
+    public static final Creator<ReviewModel> CREATOR = new Creator<ReviewModel>() {
+        @Override
+        public ReviewModel createFromParcel(Parcel in) {
+            return new ReviewModel(in);
+        }
+
+        @Override
+        public ReviewModel[] newArray(int size) {
+            return new ReviewModel[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -43,5 +65,18 @@ public class ReviewModel {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(author);
+        parcel.writeString(content);
+        parcel.writeString(url);
     }
 }

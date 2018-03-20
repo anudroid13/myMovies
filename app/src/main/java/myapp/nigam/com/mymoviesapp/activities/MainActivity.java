@@ -218,35 +218,35 @@ public class MainActivity extends AppCompatActivity implements GetMoviesListener
         showpDialog();
         task = new GetFavorites(new WeakReference<Context>(MainActivity.this),
                 new GetFavoritesListener() {
-            @Override
-            public void onSuccess(ArrayList<MovieDetails> arrayList) {
-                hidepDialog();
-                if (arrayList != null && !arrayList.isEmpty()) {
-                    movieDetails = arrayList;
-                    adapter.setArrayList(movieDetails);
+                    @Override
+                    public void onSuccess(ArrayList<MovieDetails> arrayList) {
+                        hidepDialog();
+                        if (arrayList != null && !arrayList.isEmpty()) {
+                            movieDetails = arrayList;
+                            adapter.setArrayList(movieDetails);
 
-                    if (getSupportActionBar() != null) {
-                        getSupportActionBar().setTitle(R.string.favorites);
+                            if (getSupportActionBar() != null) {
+                                getSupportActionBar().setTitle(R.string.favorites);
+                            }
+                            category = "favorites";
+                        } else {
+                            if (isDataChanged) {
+                                movieDetails = arrayList;
+                                adapter.setArrayList(movieDetails);
+                            }
+                            Toast.makeText(MainActivity.this, "You have not added any " +
+                                            "movie under this category",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    category = "favorites";
-                } else {
-                    if (isDataChanged) {
-                        movieDetails = arrayList;
-                        adapter.setArrayList(movieDetails);
-                    }
-                    Toast.makeText(MainActivity.this, "You have not added any " +
-                                    "movie under this category",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
 
-            @Override
-            public void onFailure() {
-                hidepDialog();
-                Toast.makeText(MainActivity.this, R.string.error_msg,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onFailure() {
+                        hidepDialog();
+                        Toast.makeText(MainActivity.this, R.string.error_msg,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
         task.execute();
     }
 

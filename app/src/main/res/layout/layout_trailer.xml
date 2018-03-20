@@ -6,15 +6,17 @@
     android:layout_margin="2dp">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:src="@drawable/ic_play_arrow_black_24dp"
-        android:scaleType="center" />
+        android:layout_width="128dp"
+        android:layout_height="72dp"
+        android:id="@+id/img_thumbnail"
+        android:scaleType="fitXY" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txt_name"
+        android:layout_marginLeft="16dp"
+        android:textSize="16dp"
         android:layout_gravity="center_vertical"
-        android:textColor="@color/colorGray" />
+        android:textColor="@color/colorBlack" />
 </LinearLayout>

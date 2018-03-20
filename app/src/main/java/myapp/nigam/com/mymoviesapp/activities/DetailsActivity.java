@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -70,6 +69,8 @@ public class DetailsActivity extends AppCompatActivity implements
     private ArrayList<ReviewModel> reviewModels;
     private MovieDetails details;
     private final String MODEL_KEY = "model";
+    private final String TRAILERS_LIST = "trailers_list";
+    private final String REVIEWS_LIST = "reviews_list";
 
     private final OnItemClickListener trailerListener = new OnItemClickListener() {
         @Override
@@ -118,6 +119,10 @@ public class DetailsActivity extends AppCompatActivity implements
             setData();
         }
 
+        if (savedInstanceState == null) {
+            getData();
+        }
+
         chkFav.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -139,6 +144,23 @@ public class DetailsActivity extends AppCompatActivity implements
         });
     }
 
+    private void getData() {
+        URL urlTrailers = NetworkUtil.buildTrailersUrl(details.getId());
+        URL urlReviews = NetworkUtil.buildReviewsUrl(details.getId());
+
+        if (NetworkUtil.isNetworkAvailable(DetailsActivity.this)) {
+            if (urlTrailers != null) {
+                GetTrailers task = new GetTrailers(DetailsActivity.this);
+                task.execute(String.valueOf(urlTrailers));
+            }
+
+            if (urlReviews != null) {
+                GetReviews task = new GetReviews(DetailsActivity.this);
+                task.execute(String.valueOf(urlReviews));
+            }
+        }
+    }
+
     private void setData() {
         String dateOfRelease = details.getReleaseDate();
         String[] date = dateOfRelease.split("-");
@@ -156,21 +178,6 @@ public class DetailsActivity extends AppCompatActivity implements
             }
         } catch (URISyntaxException e) {
             e.printStackTrace();
-        }
-
-        URL urlTrailers = NetworkUtil.buildTrailersUrl(details.getId());
-        URL urlReviews = NetworkUtil.buildReviewsUrl(details.getId());
-
-        if (NetworkUtil.isNetworkAvailable(DetailsActivity.this)) {
-            if (urlTrailers != null) {
-                GetTrailers task = new GetTrailers(DetailsActivity.this);
-                task.execute(String.valueOf(urlTrailers));
-            }
-
-            if (urlReviews != null) {
-                GetReviews task = new GetReviews(DetailsActivity.this);
-                task.execute(String.valueOf(urlReviews));
-            }
         }
 
         MovieDBHelper helper = new MovieDBHelper(DetailsActivity.this);
@@ -194,9 +201,6 @@ public class DetailsActivity extends AppCompatActivity implements
         reviewAdapter = new ReviewAdapter(reviewListener);
         recyclerViewTrailers.setAdapter(trailerAdapter);
         recyclerViewReviews.setAdapter(reviewAdapter);
-        DividerItemDecoration itemDecorator = new DividerItemDecoration(DetailsActivity.this,
-                DividerItemDecoration.VERTICAL);
-        itemDecorator.setDrawable(getResources().getDrawable(R.drawable.divider, null));
     }
 
     @Override
@@ -207,7 +211,7 @@ public class DetailsActivity extends AppCompatActivity implements
 
             case android.R.id.home: {
                 setResult(RESULT_OK);
-                DetailsActivity.this.finish();
+                finish();
                 break;
             }
 
@@ -234,5 +238,33 @@ public class DetailsActivity extends AppCompatActivity implements
         }
         reviewModels = reviews;
         reviewAdapter.setArrayList(reviews);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(TRAILERS_LIST, trailerModels);
+        outState.putParcelableArrayList(REVIEWS_LIST, reviewModels);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            trailerModels = savedInstanceState.getParcelableArrayList(TRAILERS_LIST);
+            reviewModels = savedInstanceState.getParcelableArrayList(REVIEWS_LIST);
+
+            if (!reviewModels.isEmpty()) {
+                llReviews.setVisibility(View.VISIBLE);
+            }
+
+            if (!trailerModels.isEmpty()) {
+                llTrailers.setVisibility(View.VISIBLE);
+            }
+
+            reviewAdapter.setArrayList(reviewModels);
+            trailerAdapter.setArrayList(trailerModels);
+        }
     }
 }

@@ -5,27 +5,35 @@
     build-mode="COLD"
     density="xhdpi"
     format="10"
+    ir-eligibility="COMPATIBLE"
     plugin-version="3.0.1"
-    timestamp="1521487491790"
+    timestamp="1521570621798"
     token="-4632077866749841017"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="2424" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="17" />
     <task
         name="verifier"
-        duration="0" />
+        duration="3" />
+
+    <artifact
+        location="C:\Users\Nigam\myMovies\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+        type="SPLIT" />
+    <artifact
+        location="C:\Users\Nigam\myMovies\app\build\outputs\apk\debug\app-debug.apk"
+        type="SPLIT_MAIN" />
 
     <build
         build-mode="FULL"
-        timestamp="1521487223885"
+        timestamp="1521569433073"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\Nigam\myMovies\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
@@ -67,15 +75,14 @@
     <build
         build-mode="COLD"
         ir-eligibility="COMPATIBLE"
-        timestamp="1521487409714"
+        timestamp="1521570621798"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
-            location="C:\Users\Nigam\myMovies\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
+            location="C:\Users\Nigam\myMovies\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
             type="SPLIT" />
+        <artifact
+            location="C:\Users\Nigam\myMovies\app\build\outputs\apk\debug\app-debug.apk"
+            type="SPLIT_MAIN" />
     </build>
-    <build
-        build-mode="COLD"
-        timestamp="1521487491790"
-        verifier="COLD_SWAP_REQUESTED" />
 
 </instant-run>
