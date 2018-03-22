@@ -2,7 +2,9 @@ package myapp.nigam.com.mymoviesapp.activities;
 
 import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,7 +33,7 @@ import myapp.nigam.com.mymoviesapp.adapters.ReviewAdapter;
 import myapp.nigam.com.mymoviesapp.adapters.TrailerAdapter;
 import myapp.nigam.com.mymoviesapp.asynctasks.GetReviews;
 import myapp.nigam.com.mymoviesapp.asynctasks.GetTrailers;
-import myapp.nigam.com.mymoviesapp.content.MovieDBHelper;
+import myapp.nigam.com.mymoviesapp.content.MovieContract;
 import myapp.nigam.com.mymoviesapp.interfaces.GetReviewsListener;
 import myapp.nigam.com.mymoviesapp.interfaces.GetTrailersListener;
 import myapp.nigam.com.mymoviesapp.interfaces.OnItemClickListener;
@@ -126,15 +128,30 @@ public class DetailsActivity extends AppCompatActivity implements
         chkFav.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                MovieDBHelper helper = new MovieDBHelper(DetailsActivity.this);
                 if (b) {
-                    if (helper.insert(details) != 0) {
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put(MovieContract.MovieEntry.COL_TITLE, details.getTitle());
+                    contentValues.put(MovieContract.MovieEntry.COL_ID, details.getId());
+                    contentValues.put(MovieContract.MovieEntry.COL_DATE, details.getReleaseDate());
+                    contentValues.put(MovieContract.MovieEntry.COL_RATE, details.getVoteAverage());
+                    contentValues.put(MovieContract.MovieEntry.COL_POSTER_PATH, details.getPosterPath());
+                    contentValues.put(MovieContract.MovieEntry.COL_SYNOPSIS, details.getOverview());
+
+                    Uri uri = getContentResolver().insert(MovieContract.MovieEntry.CONTENT_URI, contentValues);
+
+                    if (uri != null) {
                         Toast.makeText(DetailsActivity.this,
                                 getString(R.string.added_to_favourite_label),
                                 Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    if (helper.delete(String.valueOf(details.getId())) > 0) {
+                    Uri uri = MovieContract.MovieEntry.CONTENT_URI;
+                    uri = uri.buildUpon().appendPath(String.valueOf(details.getId())).build();
+
+                    int rowDeleted = getContentResolver().delete(uri, MovieContract.MovieEntry.COL_ID,
+                            new String[]{String.valueOf(details.getId())});
+
+                    if (rowDeleted > 0) {
                         Toast.makeText(DetailsActivity.this,
                                 getString(R.string.add_to_favourite_label),
                                 Toast.LENGTH_SHORT).show();
@@ -180,12 +197,20 @@ public class DetailsActivity extends AppCompatActivity implements
             e.printStackTrace();
         }
 
-        MovieDBHelper helper = new MovieDBHelper(DetailsActivity.this);
-        if (helper.isMovieExists(String.valueOf(details.getId()))) {
+        if (isFav()) {
             chkFav.setChecked(true);
         } else {
             chkFav.setChecked(false);
         }
+    }
+
+    private boolean isFav() {
+        Uri uri = MovieContract.MovieEntry.CONTENT_URI;
+        uri = uri.buildUpon().appendPath(String.valueOf(details.getId())).build();
+
+        Cursor cursor = getContentResolver().query(uri, null, null,
+                null, null);
+        return cursor.getCount() > 0;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

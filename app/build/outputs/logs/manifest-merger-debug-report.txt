@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-26:12
+ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-31:12
 MERGED from [com.android.support:design:26.1.0] C:\Users\Nigam\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\0550a6b64b1f83fd4b7a987455978ebe\AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:recyclerview-v7:26.1.0] C:\Users\Nigam\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\606aae6bc48ffe012ae1ad68b25d7a86\AndroidManifest.xml:17:1-28:12
 MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\Nigam\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.1.0.aar\7c43f21156ad791920d49395d1cf691a\AndroidManifest.xml:17:1-28:12
@@ -20,20 +20,20 @@ MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\Nigam\.gr
 MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\Nigam\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\8c9a549c6bc8a3743d08f6e44c9c66d3\AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:support-compat:26.1.0] C:\Users\Nigam\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\c9c1de9ad961c697d31032609b1b8ecd\AndroidManifest.xml:17:1-31:12
 MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Nigam\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\3dc52ddfe3afa9ac7c5699879d1c64e2\AndroidManifest.xml:17:1-30:12
-INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-26:12
+INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-31:12
 	package
 		ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:3:5-42
 		INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-26:12
+		ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-31:12
 		INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-26:12
+		ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:1-31:12
 		INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:2:11-69
@@ -46,7 +46,7 @@ ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:6:5-79
 	android:name
 		ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:6:22-76
 application
-ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:8:5-24:19
+ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:8:5-29:19
 MERGED from [com.android.support:design:26.1.0] C:\Users\Nigam\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\0550a6b64b1f83fd4b7a987455978ebe\AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:design:26.1.0] C:\Users\Nigam\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\0550a6b64b1f83fd4b7a987455978ebe\AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:recyclerview-v7:26.1.0] C:\Users\Nigam\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\606aae6bc48ffe012ae1ad68b25d7a86\AndroidManifest.xml:22:5-26:19
@@ -109,6 +109,14 @@ ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:22:9-23:52
 		ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:23:13-50
 	android:name
 		ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:22:19-61
+provider#myapp.nigam.com.mymoviesapp.content.MoviesContentProvider
+ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:25:9-28:40
+	android:authorities
+		ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:26:13-62
+	android:exported
+		ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:28:13-37
+	android:name
+		ADDED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml:27:13-85
 uses-sdk
 INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Nigam\myMovies\app\src\main\AndroidManifest.xml

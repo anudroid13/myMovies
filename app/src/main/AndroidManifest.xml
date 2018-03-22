@@ -21,6 +21,11 @@
         </activity>
         <activity android:name=".activities.DetailsActivity"
             android:label="@string/movie_details"/>
+
+        <provider
+            android:authorities="myapp.nigam.com.mymoviesapp"
+            android:name="myapp.nigam.com.mymoviesapp.content.MoviesContentProvider"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -31,6 +31,11 @@
             android:name="myapp.nigam.com.mymoviesapp.activities.DetailsActivity"
             android:label="@string/movie_details" />
 
+        <provider
+            android:name="myapp.nigam.com.mymoviesapp.content.MoviesContentProvider"
+            android:authorities="myapp.nigam.com.mymoviesapp"
+            android:exported="false" />
+
         <meta-data
             android:name="android.support.VERSION"
             android:value="26.1.0" />

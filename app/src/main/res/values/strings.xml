@@ -18,5 +18,5 @@
     <string name="favorites">Favorites</string>
     <string name="favorite">Favorite</string>
     <string name="added_to_favourite_label">Added to favorites</string>
-    <string name="add_to_favourite_label">Add to favourite</string>
+    <string name="add_to_favourite_label">Removed from favorites</string>
 </resources>
