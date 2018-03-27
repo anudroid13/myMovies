@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import static myapp.nigam.com.mymoviesapp.content.MovieContract.MovieEntry.TABLE_NAME;
 
@@ -23,6 +24,7 @@ public class MoviesContentProvider extends ContentProvider {
     public static final int MOVIES = 100;
     public static final int MOVIES_WITH_ID = 101;
     private static final UriMatcher sUriMatcher = buildUriMatcher();
+    private static final String TAG = "MoviesContentProvider";
 
     public static UriMatcher buildUriMatcher() {
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -50,39 +52,41 @@ public class MoviesContentProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
 
 
-        Cursor retCursor;
+        Cursor retCursor = null;
 
-        switch (match) {
-            case MOVIES:
-                retCursor = db.query(TABLE_NAME,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null);
-                break;
+        try {
+            switch (match) {
+                case MOVIES:
+                    retCursor = db.query(TABLE_NAME,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null);
+                    break;
 
-            case MOVIES_WITH_ID:
-                String[] columns = new String[]{MovieContract.MovieEntry._ID};
-                String whereClause = MovieContract.MovieEntry.COL_ID + "= ?";
-                String id = uri.getPathSegments().get(1);
-                String[] whereArgs = new String[]{id};
+                case MOVIES_WITH_ID:
+                    String[] columns = new String[]{MovieContract.MovieEntry._ID};
+                    String whereClause = MovieContract.MovieEntry.COL_ID + "= ?";
+                    String id = uri.getPathSegments().get(1);
+                    String[] whereArgs = new String[]{id};
 
-                retCursor = db.query(TABLE_NAME,
-                        columns,
-                        whereClause,
-                        whereArgs,
-                        null,
-                        null,
-                        null);
-                break;
-
-            default:
-                throw new UnsupportedOperationException("Unknown uri: " + uri);
+                    retCursor = db.query(TABLE_NAME,
+                            columns,
+                            whereClause,
+                            whereArgs,
+                            null,
+                            null,
+                            null);
+                    break;
+            }
+            if (null != retCursor && getContext() != null) {
+                retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error in query data " + e.getLocalizedMessage());
         }
-
-        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
         return retCursor;
     }
 
@@ -99,25 +103,26 @@ public class MoviesContentProvider extends ContentProvider {
         final SQLiteDatabase db = sqLiteHelper.getWritableDatabase();
         int match = sUriMatcher.match(uri);
 
-        Uri returnUri;
+        Uri returnUri = null;
+        try {
+            switch (match) {
+                case MOVIES:
 
-        switch (match) {
-            case MOVIES:
 
-                long id = db.insert(TABLE_NAME, null, contentValues);
-                if (id > 0) {
-                    returnUri = ContentUris.withAppendedId(MovieContract.MovieEntry.CONTENT_URI, id);
-                } else {
-                    throw new android.database.SQLException("Failed to insert row into " + uri);
-                }
-
-                break;
-
-            default:
-                throw new UnsupportedOperationException("Unknown uri: " + uri);
+                    long id = db.insert(TABLE_NAME, null, contentValues);
+                    if (id > 0) {
+                        returnUri = ContentUris.withAppendedId(MovieContract.MovieEntry.CONTENT_URI, id);
+                    } else {
+                        throw new android.database.SQLException("Failed to insert row into " + uri);
+                    }
+                    if (getContext() != null) {
+                        getContext().getContentResolver().notifyChange(uri, null);
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error in query data " + e.getLocalizedMessage());
         }
-
-        getContext().getContentResolver().notifyChange(uri, null);
         return returnUri;
     }
 
@@ -127,23 +132,21 @@ public class MoviesContentProvider extends ContentProvider {
         final SQLiteDatabase db = sqLiteHelper.getWritableDatabase();
         int match = sUriMatcher.match(uri);
 
-        int tasksDeleted; // starts as 0
+        int tasksDeleted = 0; // starts as 0
 
-        switch (match) {
+        try {
+            switch (match) {
 
-            case MOVIES_WITH_ID:
-                String id = uri.getPathSegments().get(1);
-                tasksDeleted = db.delete(TABLE_NAME, MovieContract.MovieEntry.COL_ID
-                        + "=?", new String[]{id});
-                break;
-            default:
-                throw new UnsupportedOperationException("Unknown uri: " + uri);
-        }
-
-        if (tasksDeleted != 0) {
+                case MOVIES_WITH_ID:
+                    String id = uri.getPathSegments().get(1);
+                    tasksDeleted = db.delete(TABLE_NAME, MovieContract.MovieEntry.COL_ID
+                            + "=?", new String[]{id});
+                    break;
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error in query data " + e.getLocalizedMessage());
             getContext().getContentResolver().notifyChange(uri, null);
         }
-
         return tasksDeleted;
     }
 

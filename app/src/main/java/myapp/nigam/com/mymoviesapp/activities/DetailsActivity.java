@@ -208,9 +208,19 @@ public class DetailsActivity extends AppCompatActivity implements
         Uri uri = MovieContract.MovieEntry.CONTENT_URI;
         uri = uri.buildUpon().appendPath(String.valueOf(details.getId())).build();
 
-        Cursor cursor = getContentResolver().query(uri, null, null,
-                null, null);
-        return cursor.getCount() > 0;
+        Cursor cursor = null;
+        try {
+            cursor = getContentResolver().query(uri, null, null,
+                    null, null);
+        } catch (Exception e) {
+          e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return cursor != null && cursor.getCount() > 0;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -280,7 +290,7 @@ public class DetailsActivity extends AppCompatActivity implements
             trailerModels = savedInstanceState.getParcelableArrayList(TRAILERS_LIST);
             reviewModels = savedInstanceState.getParcelableArrayList(REVIEWS_LIST);
 
-            if (!reviewModels.isEmpty()) {
+            if (reviewModels != null && !reviewModels.isEmpty()) {
                 llReviews.setVisibility(View.VISIBLE);
             }
 

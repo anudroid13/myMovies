@@ -25,31 +25,40 @@ public class GetFavorites extends AsyncTask<Void, Void, ArrayList<MovieDetails>>
     @Override
     protected ArrayList<MovieDetails> doInBackground(Void... args) {
 
-        Uri uri = MovieContract.MovieEntry.CONTENT_URI;
-        Cursor cursor = mContext.get().getContentResolver().query(uri, null,
-                null, null, null);
-
         ArrayList<MovieDetails> details = new ArrayList<>();
+        Cursor cursor = null;
+        try {
+            Uri uri = MovieContract.MovieEntry.CONTENT_URI;
+            cursor = mContext.get().getContentResolver().query(uri, null,
+                    null, null, null);
 
-        if (cursor != null && cursor.getCount() > 0) {
-            while (cursor.moveToNext()) {
-                MovieDetails detail = new MovieDetails();
-                detail.setTitle(cursor.getString(cursor.getColumnIndex
-                        (MovieContract.MovieEntry.COL_TITLE)));
-                detail.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex
-                        (MovieContract.MovieEntry.COL_ID))));
-                detail.setReleaseDate(cursor.getString(cursor.getColumnIndex
-                        (MovieContract.MovieEntry.COL_DATE)));
-                detail.setPosterPath(cursor.getString(cursor.getColumnIndex
-                        (MovieContract.MovieEntry.COL_POSTER_PATH)));
-                detail.setVoteAverage(Float.parseFloat(cursor.getString(cursor.getColumnIndex
-                        (MovieContract.MovieEntry.COL_RATE))));
-                detail.setOverview(cursor.getString(cursor.getColumnIndex
-                        (MovieContract.MovieEntry.COL_SYNOPSIS)));
+            if (cursor != null && cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    MovieDetails detail = new MovieDetails();
+                    detail.setTitle(cursor.getString(cursor.getColumnIndex
+                            (MovieContract.MovieEntry.COL_TITLE)));
+                    detail.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex
+                            (MovieContract.MovieEntry.COL_ID))));
+                    detail.setReleaseDate(cursor.getString(cursor.getColumnIndex
+                            (MovieContract.MovieEntry.COL_DATE)));
+                    detail.setPosterPath(cursor.getString(cursor.getColumnIndex
+                            (MovieContract.MovieEntry.COL_POSTER_PATH)));
+                    detail.setVoteAverage(Float.parseFloat(cursor.getString(cursor.getColumnIndex
+                            (MovieContract.MovieEntry.COL_RATE))));
+                    detail.setOverview(cursor.getString(cursor.getColumnIndex
+                            (MovieContract.MovieEntry.COL_SYNOPSIS)));
 
-                details.add(detail);
+                    details.add(detail);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
             }
         }
+
         return details;
     }
 
